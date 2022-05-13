@@ -1,0 +1,185 @@
+$light: #fcfcfc;
+$text: #000;
+$active: #bf4342;
+
+%plus {
+  background-image: url(../icons/down.svg);
+}
+
+%double-plus {
+  background-image: url(../icons/double-down.svg);
+}
+
+%minus {
+  background-image: url(../icons/up.svg);
+}
+
+%double-minus {
+  background-image: url(../icons/double-up.svg);
+}
+
+%chevron {
+  content: "";
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  @extend %plus;
+}
+
+@media (min-width: 900px) {
+  body.admin-bar .utoc.is-sticky {
+    top: calc(1rem + 32px);
+  }
+}
+
+.utoc {
+  border-radius: 10px;
+  background-color: $light;
+  color: $text;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  z-index: 97;
+  user-select: none;
+  border: 1px solid #f1f1f1;
+
+  &.is-sticky {
+    position: sticky;
+    top: 1rem;
+  }
+
+  &-title {
+    display: block;
+    padding: 16px 24px 24px 24px;
+    font-size: 20px;
+    user-select: none;
+    position: relative;
+    color: #000;
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 24px;
+      width: 10%;
+      border-bottom: 1px solid;
+    }
+
+    &::after {
+      @extend %chevron;
+      right: 24px;
+    }
+  }
+
+  &.is-active &-title::after {
+    @extend %minus;
+  }
+
+  &:not(.is-active) &-level-0 {
+    display: none;
+  }
+
+  &-level {
+    padding-left: 30px;
+    margin: 0;
+
+    > li.is-current {
+      &::marker {
+        color: $active;
+      }
+
+      > span > a {
+        color: $active;
+      }
+    }
+
+    > li {
+      padding-top: 6px;
+
+      span {
+        display: flex;
+      }
+    }
+
+    &-0 {
+      list-style-type: none;
+      padding-bottom: 16px;
+      font-size: 17px;
+      max-height: 65vh;
+      overflow-y: auto;
+      overflow-y: overlay;
+      padding: 0 24px;
+
+      > li {
+        position: relative;
+        padding-right: 35px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+
+        &:not(:last-child) {
+          border-bottom: 1px solid rgba($text, 0.5);
+        }
+
+        &.utoc-has-children {
+          &.is-active > span::after {
+            @extend %double-minus;
+          }
+
+          &:not(.is-active) > ul {
+            display: none;
+          }
+
+          > span::after {
+            @extend %chevron;
+            @extend %double-plus;
+            top: 20px;
+          }
+        }
+      }
+    }
+
+    &-1 {
+      font-size: 14px;
+      list-style-type: disc;
+    }
+
+    &-2,
+    &-3,
+    &-4,
+    &-5 {
+      font-size: 13px;
+      list-style-type: disc;
+    }
+  }
+
+  a,
+  &-title {
+    text-decoration: none !important;
+    border: 0 !important;
+    transition: all 0.1s ease-in-out;
+  }
+
+  a {
+    color: $text;
+
+    &:hover {
+      color: $active;
+    }
+  }
+}
+
+body:not(.wp-admin) .utoc {
+  a {
+    box-shadow: none !important;
+    background: none !important;
+  }
+}

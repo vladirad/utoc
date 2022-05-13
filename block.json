@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/block.json",
+  "apiVersion": 2,
+  "name": "btoc/preview-block",
+  "version": "0.1.0",
+  "title": "UTOC Preview Block",
+  "category": "text",
+  "icon": "menu",
+  "description": "An example block viewing and saving post meta",
+  "supports": {
+    "html": false
+  },
+  "textdomain": "utoc",
+  "editorScript": "file:./build/index.js"
+}

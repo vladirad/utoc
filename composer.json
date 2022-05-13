@@ -1,0 +1,12 @@
+{
+  "name": "devstetic/utoc",
+  "description": "Ultimate Table of Contents Plugin For Wordpress",
+  "autoload": {
+    "psr-4": {
+      "Devstetic\\Utoc\\": "src/"
+    }
+  },
+  "require": {
+    "ivopetkov/html5-dom-document-php": "2.*"
+  }
+}
